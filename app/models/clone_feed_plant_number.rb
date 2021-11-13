@@ -1,0 +1,2 @@
+class CloneFeedPlantNumber < ApplicationRecord
+end

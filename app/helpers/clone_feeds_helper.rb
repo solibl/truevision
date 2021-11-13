@@ -1,0 +1,2 @@
+module CloneFeedsHelper
+end

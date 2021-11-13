@@ -1,0 +1,2 @@
+class Tray < ApplicationRecord
+end

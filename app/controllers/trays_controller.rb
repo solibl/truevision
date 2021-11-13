@@ -1,0 +1,2 @@
+class TraysController < ApplicationController
+end

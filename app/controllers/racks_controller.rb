@@ -1,0 +1,2 @@
+class RacksController < ApplicationController
+end

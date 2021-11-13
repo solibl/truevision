@@ -1,0 +1,2 @@
+class CloneFeedsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class CloneFeedPlantNumbersController < ApplicationController
+end
