@@ -21,14 +21,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "clone_feed_days_plant_numbers", id: false, force: :cascade do |t|
-    t.bigint "clone_feed_plant_number_id", null: false
-    t.bigint "clone_feed_day_id", null: false
-    t.integer "minimum_feed_weight"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "clone_feed_plant_numbers", force: :cascade do |t|
     t.string "number_of_clones"
     t.datetime "created_at", precision: 6, null: false
@@ -36,8 +28,13 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
   end
 
   create_table "clone_feed_schedules", force: :cascade do |t|
+    t.bigint "clone_feed_plant_number_id"
+    t.bigint "clone_feed_day_id"
+    t.integer "minimum_feed_weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["clone_feed_day_id"], name: "index_clone_feed_schedules_on_clone_feed_day_id"
+    t.index ["clone_feed_plant_number_id"], name: "index_clone_feed_schedules_on_clone_feed_plant_number_id"
   end
 
   create_table "clone_feeds", force: :cascade do |t|
@@ -87,20 +84,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.index ["tray_id"], name: "index_data_sheets_on_tray_id"
   end
 
-  create_table "data_sheets_strains", id: false, force: :cascade do |t|
-    t.bigint "data_sheet_id", null: false
-    t.bigint "strain_id", null: false
-    t.bigint "root_rating_id"
-    t.bigint "location_id"
-    t.integer "initial_dry_back"
-    t.integer "total_clone_count"
-    t.integer "average_gram_difference"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["location_id"], name: "index_data_sheets_strains_on_location_id"
-    t.index ["root_rating_id"], name: "index_data_sheets_strains_on_root_rating_id"
-  end
-
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -125,8 +108,19 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
   end
 
   create_table "strain_data_sheets", force: :cascade do |t|
+    t.bigint "strain_id"
+    t.bigint "data_sheet_id"
+    t.bigint "root_rating_id"
+    t.bigint "location_id"
+    t.integer "initial_dry_back"
+    t.integer "total_clone_count"
+    t.integer "average_gram_difference"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["data_sheet_id"], name: "index_strain_data_sheets_on_data_sheet_id"
+    t.index ["location_id"], name: "index_strain_data_sheets_on_location_id"
+    t.index ["root_rating_id"], name: "index_strain_data_sheets_on_root_rating_id"
+    t.index ["strain_id"], name: "index_strain_data_sheets_on_strain_id"
   end
 
   create_table "strains", force: :cascade do |t|
@@ -149,8 +143,10 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
 
   create_table "users", force: :cascade do |t|
     t.bigint "location_id"
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "authorization_level"
+    t.string "initials"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "email", default: "", null: false
@@ -163,6 +159,8 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "clone_feed_schedules", "clone_feed_days"
+  add_foreign_key "clone_feed_schedules", "clone_feed_plant_numbers"
   add_foreign_key "clone_feeds", "locations"
   add_foreign_key "clone_feeds", "users"
   add_foreign_key "data_entries", "data_sheets"
@@ -170,9 +168,11 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
   add_foreign_key "data_sheets", "locations"
   add_foreign_key "data_sheets", "racks"
   add_foreign_key "data_sheets", "trays"
-  add_foreign_key "data_sheets_strains", "locations"
-  add_foreign_key "data_sheets_strains", "root_ratings"
   add_foreign_key "racks", "locations"
+  add_foreign_key "strain_data_sheets", "data_sheets"
+  add_foreign_key "strain_data_sheets", "locations"
+  add_foreign_key "strain_data_sheets", "root_ratings"
+  add_foreign_key "strain_data_sheets", "strains"
   add_foreign_key "trays", "locations"
   add_foreign_key "trays", "racks"
   add_foreign_key "users", "locations"

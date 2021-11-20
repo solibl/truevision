@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="sidebar">
+    <h3>Dashboard</h3>
+    <ul>
+      <li>
+        <a href="#">Racks <i class="fas fa-warehouse"></i></a>
+      </li>
+      <li>
+        <a href="#">Data Sheets <i class="fas fa-table"></i></a>
+      </li>
+      <li>
+        <a href="#">Clones <i class="fas fa-cannabis"></i></a>
+      </li>
+      <li>
+        <%=link_to destroy_user_session_path, method: :delete  do %>
+          Sign Out <i class="fas fa-sign-out-alt"></i>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <div class="main_content">
+  </div>
+</div>

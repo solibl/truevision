@@ -1,26 +1,29 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<html class="login-page">
+  <div id="login-button">
+    <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
+    </img>
   </div>
+  <div id="login-container">
+    <div id="login-form">
+      <h1>Log In</h1>
+      <span class="close-btn">
+        <img src="https://www.nicepng.com/png/full/52-521935_close-white-close-button-png.png"></img>
+      </span>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-mail" %>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Log in" , id: 'login-submit'%>
+      </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</html>
 
-<%= render "devise/shared/links" %>

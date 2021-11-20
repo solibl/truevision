@@ -1,2 +1,3 @@
 class DataEntriesController < ApplicationController
+
 end
