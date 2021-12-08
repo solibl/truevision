@@ -1,0 +1,18 @@
+<div class= "content-container sign-up">
+  <%= form_for @user, as: :user, url: create_new_user_path(@user) do |f| %>
+    <h1>Create A New User</h1>
+    <% if @user.errors.any? %>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li class= "error-messages"><%= message %> </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= f.text_field :first_name, placeholder: "First Name", required: true %>
+    <%= f.text_field :last_name, placeholder: "Last Name", required: true %>
+    <%= f.email_field :email, placeholder: "Email", required: true %>
+    <%= f.password_field :password, placeholder: "Password", required: true %>
+
+    <%= f.submit 'Add User' %>
+  <% end %>
+</div>

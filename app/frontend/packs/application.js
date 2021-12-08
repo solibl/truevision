@@ -13,8 +13,7 @@ require("packs/login")
 
 //jquery and jquery-ui
 require("jquery")
-require("jquery-ui")
-require('jquery-ui-bundle');
+require('jquery-ui-bundle')
 
 import '../js/bootstrap_js_files.js'
 // Uncomment to copy all static images under ../images to the output folder and reference

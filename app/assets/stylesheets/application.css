@@ -42,8 +42,8 @@ body{
 }
 
 .wrapper .sidebar{
-  width: 200px;
-  height: 100%;
+  width: 225px;
+  height: 100vh;
   background: #28383c;
   padding: 30px 0px;
   position: fixed;
@@ -86,24 +86,6 @@ body{
   color: #fff;
 } 
 
-.wrapper .main_content{
-  width: 100%;
-  margin-left: 200px;
-}
-
-.wrapper .main_content .header{
-  padding: 20px;
-  background: #fff;
-  color: #717171;
-  border-bottom: 1px solid #e0e4e8;
-}
-
-.wrapper .main_content .info{
-  margin: 20px;
-  color: #717171;
-  line-height: 25px;
-}
-
 /* Login Page */
 html.login-page {
   background: url(https://images.unsplash.com/photo-1635874615085-cc17dd975643?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)
@@ -138,7 +120,26 @@ img {
   overflow: hidden;
   opacity: 0.8;
   box-shadow: 10px 10px 30px #000;
+  animation: nohovering 0.9s; /* IE 10+, Fx 29+ */
+  transition: all .6s ease-in-out; 
 }
+
+#login-button:hover {
+  transform: scale(2); 
+  animation: hovering 5s infinite; /* IE 10+, Fx 29+ */
+}
+
+
+@keyframes nohovering {
+  0%   { z-index: 1; }
+  100% { z-index: 9; }
+}
+
+@keyframes hovering {
+  0%   { z-index: 10; }
+  100% { z-index: 10; }
+}
+
 
 /* Login container */
 #login-container {
@@ -148,8 +149,8 @@ img {
   right: 0;
   bottom: 0;
   margin: auto;
-  width: 260px;
-  height: 260px;
+  width: 400px;
+  height: 300px;
   border-radius: 5px;
   background: rgba(3, 3, 3, 0.8);
   box-shadow: 1px 1px 50px #000;
@@ -157,6 +158,7 @@ img {
 }
 
 #login-form {
+  horizontal-align: center;
   padding: 30px;
 }
 
@@ -184,7 +186,7 @@ img {
 }
 
 /* Heading */
-h1 {
+#login-form h1 {
   font-family: "Josefin Sans", sans-serif;
   position: relative;
   margin-top: 0px;
@@ -200,7 +202,7 @@ input {
   font-family: "Josefin Sans", sans-serif;
   text-decoration: none;
   position: relative;
-  width: 80%;
+  width: 100%;
   display: block;
   margin: 9px auto;
   font-size: 17px;
@@ -221,22 +223,6 @@ input {
   background: rgba(3, 3, 3, 0.18);
 }
 
-/* Placeholders */
-::-webkit-input-placeholder {
-  color: #ddd;
-}
-:-moz-placeholder {
-  /* Firefox 18- */
-  color: red;
-}
-::-moz-placeholder {
-  /* Firefox 19+ */
-  color: red;
-}
-:-ms-input-placeholder {
-  color: #333;
-}
-
 /* Link */
 #login-submit{
   font-family: "Josefin Sans", sans-serif;
@@ -245,6 +231,116 @@ input {
   background: rgba(107, 255, 3, 0.3);
 }
 
-#login-submit:hover {
-  opacity: 0.7;
+/* Main Content */
+.content-container {
+  justify-content: center;
+  text-align: center;
+}
+
+.wrapper .main_content{
+  width: 100%;
+  height: 100vh;
+  margin-left: 225px;
+  padding-top: 50px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: #D3D3D3;
+}
+
+.wrapper .main_content .header{
+  padding: 20px;
+  background: #fff;
+  color: #717171;
+  border-bottom: 1px solid #e0e4e8;
+}
+
+.wrapper .main_content .info{
+  margin: 20px;
+  color: #717171;
+  line-height: 25px;
+}
+
+/* Sign Up */
+
+.main_content input {
+  font-family: "Josefin Sans", sans-serif;
+  text-decoration: none;
+  position: relative;
+  width: 400px;
+  display: block;
+  margin: 9px auto;
+  font-size: 17px;
+  color: #01b8aa;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #28383c;
+  text-align: center;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.main_content input:focus {
+  outline: none;
+  box-shadow: 3px 3px 10px #333;
+  background: #D3D3D3;
+  color: black;
+}
+
+.main_content input[type= "submit"] {
+  margin-top: 40px;
+  background: #01b8aa;
+  color: #28383c;
+}
+
+/* Placeholders */
+::-webkit-input-placeholder {
+  color: #ddd;
+  text-align: center;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: red;
+  text-align: center;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: red;
+  text-align: center;
+}
+
+:-ms-input-placeholder {
+  color: #333;
+  text-align: center;
+}
+
+.main_content ::-webkit-input-placeholder {
+  color: #01b8aa;
+  text-align: center;
+}
+
+.main_content :-moz-placeholder {
+  /* Firefox 18- */
+  color: green;
+  text-align: center;
+}
+
+.main_content ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: green;
+  text-align: center;
+}
+
+.main_content :-ms-input-placeholder {
+  color: #01b8aa;
+  text-align: center;
+}
+
+.error-messages {
+  color: red;
 }

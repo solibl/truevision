@@ -1,0 +1,22 @@
+<div class= "content-container">
+  <%= form_for @location, as: :location, :url => {:controller => :locations, action: :update} do |f| %>
+    <h1>Edit <%=@location.name %>'s Location Information</h1>
+    <% if @location.errors.any? %>
+      <ul>
+        <% @location.errors.full_messages.each do |message| %>
+          <li class= "error-messages"><%= message %> </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= f.label :location_name %>
+    <%= f.number_field :name, value: @location.name, placeholder: @location.name , required: true %>
+    <%= f.label :total_racks %>
+    <%= f.number_field :total_rack, value: @location.total_rack, placeholder: @location.total_rack , required: true %>
+    <%= f.label :total_trays_per_rack %>
+    <%= f.number_field :total_tray_per_rack, value: @location.total_tray_per_rack, placeholder: @location.total_rack , required: true %>
+    <%= f.label :total_hood_days %>
+    <%= f.number_field :total_hood_days, value: @location.total_hood_days, placeholder: @location.total_rack, required: true %>
+
+    <%= f.submit 'Save Changes' %>
+  <% end %>
+</div>

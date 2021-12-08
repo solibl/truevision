@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.delete_all
+Location.delete_all
+
 Location.create(name: '810')
 Location.create(name: 'SL')
 Location.create(name: '49th')
@@ -14,4 +17,4 @@ fire_factory = Location.where(name: '810').first
 sl = Location.where(name: 'SL').first
 forty_ninth = Location.where(name: '49th').first
 
-User.create(location: fire_factory, first_name: 'Tim', last_name: 'Spelone', authorization_level: 'Admin', email: '810veg@true-vision.co', password: 'admin1', initials: 'TS')
+User.create(location: fire_factory, first_name: 'Tim', last_name: 'Spillane', authorization_level: 'Admin', email: '810veg@true-vision.co', password: 'admin1', initials: 'TS')
