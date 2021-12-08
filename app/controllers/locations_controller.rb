@@ -9,11 +9,11 @@ class LocationsController < ApplicationController
       redirect_to root_path, notice: "Location has been updated."
     # Handle a successful update.
     else
-    render 'edit'
+      render 'edit'
     end
   end
 
   def location_params
-    params.require(:location).permit(:total_rack, :total_tray_per_rack, :total_hood_days)
+    params.require(:location).permit(:name, :total_rack, :total_tray_per_rack, :total_hood_days)
   end
 end
