@@ -13,52 +13,56 @@
 
   <body>
     <% if current_user %>
-    <nav id="sidebar">
-      <div class="wrapper">
-        <div class="sidebar">
-          <h3>Dashboard</h3>
+    <nav id= "sidebar">
+      <div class= "wrapper">
+        <div class= "sidebar">
+          <div class = "homepage-button">
+            <%= link_to root_path do %>
+              <h3>Dashboard</h3>
+            <% end %>
+          </div>
           <ul>
             <li>
-              <a href="#">Data Sheets <i class="fas fa-table"></i></a>
+              <a href= "#">Data Sheets <i class= "fas fa-table"></i></a>
             </li>
             <li>
-              <a href="#">Strains <i class="fas fa-cannabis"></i></a>
+              <a href= "#">Strains <i class= "fas fa-cannabis"></i></a>
             </li>
             <li>
-              <a href="#">Watering Que 
-              <i class="fas fa-hand-holding-water"></i>
-              <span class="badge"><%= @data_sheets_watering_que.empty? ? @data_sheets_watering_que.count : 0 %></span>
+              <a href= "#">Watering Que 
+              <i class= "fas fa-hand-holding-water"></i>
+              <span class= "badge"><%= @data_sheets_watering_que.empty? ? @data_sheets_watering_que.count : 0 %></span>
               </a>
             </li>
             <li>
-              <a href="#">Transplant Que 
-              <i class="fas fa-tree"></i>
-              <span class="badge"><%= @data_sheets_watering_que.empty? ? @data_sheets_watering_que.count : 0 %></span>
+              <a href= "#">Transplant Que 
+              <i class= "fas fa-tree"></i>
+              <span class= "badge"><%= @data_sheets_watering_que.empty? ? @data_sheets_watering_que.count : 0 %></span>
               </a>
             </li>
             <li>
-              <a href="#">Set Clone Feed <i class="fas fa-tint"></i></a>
+              <a href= "#">Set Clone Feed <i class= "fas fa-tint"></i></a>
             </li>
             <% if current_user.authorization_level == "Admin" %>
             <li>
-              <%= link_to create_new_user_path do %>
-                Create User <i class="fas fa-user"></i>
+              <%= link_to edit_location_path do %>
+                Edit Location <i class= "fas fa-map-marked-alt"></i>
               <% end %>
             </li>
             <li>
-              <%= link_to edit_location_path do %>
-                Edit Location <i class="fas fa-map-marked-alt"></i>
+              <%= link_to create_new_user_path do %>
+                Create User <i class= "fas fa-user"></i>
               <% end %>
             </li>
             <% end %>
             <li>
               <%=link_to destroy_user_session_path, method: :delete  do %>
-                Sign Out <i class="fas fa-sign-out-alt"></i>
+                Sign Out <i class= "fas fa-sign-out-alt"></i>
               <% end %>
             </li>
           </ul>
         </div>
-        <div class="main_content">
+        <div class= "main_content">
             <%= yield %>
         </div>
       </div>

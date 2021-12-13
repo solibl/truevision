@@ -1,0 +1,2 @@
+class StorageRacksController < ApplicationController
+end

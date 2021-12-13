@@ -49,6 +49,14 @@ body{
   position: fixed;
 }
 
+.wrapper .sidebar .homepage-button a{
+  color: #01b8aa;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+  text-decoration: none;
+}
+
 .wrapper .sidebar h3{
   color: #01b8aa;
   text-transform: uppercase;
