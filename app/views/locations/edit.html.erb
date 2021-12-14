@@ -8,13 +8,15 @@
         <% end %>
       </ul>
     <% end %>
-    <%= f.label :location_name %>
-    <%= f.number_field :name, value: @location.name, placeholder: @location.name , required: true %>
-    <%= f.label :total_racks %>
-    <%= f.number_field :total_rack, value: @location.total_rack, placeholder: @location.total_rack , required: true %>
-    <%= f.label :total_trays_per_rack %>
-    <%= f.number_field :total_tray_per_rack, value: @location.total_tray_per_rack, placeholder: @location.total_rack , required: true %>
-    <%= f.label :total_hood_days %>
+    <%= f.label :location_name, "Location Name" %>
+    <%= f.text_field :name, value: @location.name, placeholder: @location.name, required: true %>
+    <%= f.label :total_racks, "Total Active Racks in Location" %>
+    <%= f.number_field :total_rack, value: @location.total_rack, placeholder: @location.total_rack, required: true %>
+    <%= f.label :total_trays_per_rack, "Total Active Trays in a Rack" %>
+    <%= f.number_field :total_tray_per_rack, value: @location.total_tray_per_rack, placeholder: @location.total_rack, required: true %>
+    <%= f.label :trays_per_storage_row, "Total Trays Per Rack Row" %>
+    <%= f.number_field :trays_per_storage_row, value: @location.trays_per_storage_row, placeholder: @location.trays_per_storage_row, required: true %>
+    <%= f.label :total_hood_days, "Total Number of Days with Hood" %>
     <%= f.number_field :total_hood_days, value: @location.total_hood_days, placeholder: @location.total_rack, required: true %>
 
     <%= f.submit 'Save Changes' %>

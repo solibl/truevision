@@ -23,10 +23,9 @@
           </div>
           <ul>
             <li>
-              <a href= "#">Data Sheets <i class= "fas fa-table"></i></a>
-            </li>
-            <li>
-              <a href= "#">Strains <i class= "fas fa-cannabis"></i></a>
+              <%= link_to data_sheet_index_path do %>
+                Data Sheets <i class= "fas fa-table"></i>
+              <% end %>
             </li>
             <li>
               <a href= "#">Watering Que 
@@ -41,9 +40,14 @@
               </a>
             </li>
             <li>
-              <a href= "#">Set Clone Feed <i class= "fas fa-tint"></i></a>
+              <%= link_to edit_clone_feed_path do %>
+                Set Clone Feed  <i class= "fas fa-tint"></i>
+              <% end %>
             </li>
             <% if current_user.authorization_level == "Admin" %>
+            <li>
+              <a href= "#">Strains <i class= "fas fa-cannabis"></i></a>
+            </li>
             <li>
               <%= link_to edit_location_path do %>
                 Edit Location <i class= "fas fa-map-marked-alt"></i>

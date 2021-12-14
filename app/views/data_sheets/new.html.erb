@@ -1,0 +1,20 @@
+<div class= "content-container">
+  <%= form_for @data_sheets, as: :data_sheet, :url => {:controller => :data_sheets, action: :create} do |f| %>
+    <h1>New Data Sheet for <%= @tray.storage_rack.name %><%= @tray.name %></h1>
+    <% if @data_sheets.errors.any? %>
+      <ul>
+        <% @data_sheets.errors.full_messages.each do |message| %>
+          <li class= "error-messages"><%= message %> </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= f.label :strain_id, "Strain Number" %>
+    <%= f.text_field :strain_id, required: true %>
+    <%= f.label :total_clone_count, "Starting Clone Count" %>
+    <%= f.number_field :starting_total_clone_number, required: true %>
+    <%= f.label :initial_soak_weight, "Initial Soak Weight(g)" %>
+    <%= f.number_field :initial_soak_weight, required: true %>
+    <%= f.hidden_field :tray_id, value: @tray.id %>
+    <%= f.submit 'Save Changes' %>
+  <% end %>
+</div>

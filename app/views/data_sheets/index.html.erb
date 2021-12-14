@@ -1,0 +1,56 @@
+<div class= "datasheet-container">
+  <section>
+    <h1>Clone Datasheets for <%= @location.name %></h1>
+  </section>
+  <section class= "rack-section">
+    <% @racks.in_groups_of(2, false).each do |group_racks| %>
+      <div class= "rack-row">
+        <% group_racks.each do |rack| %>
+          <section class= "rack-column">
+            <% if !rack.nil? %>
+            <h2>Rack <%= rack.name %></h2>
+            <% end %>
+          <% rack.trays.where(current: true).order(:id).in_groups_of(@location.trays_per_storage_row, false).each do |group_trays| %>
+            <section class= "tray-row">
+              <% group_trays.each do |tray| %>
+                    <% if !tray.nil? %>
+                      <% if tray.data_sheets != [] %>
+                        <% if tray.data_sheets.where(current: true) != [] %>
+                          <%= link_to new_data_entry_path(tray.data_sheets.ids), class: "data-sheet-link tray-column card-container" do %>
+                            <section>
+                              <div class= "card">
+                                <p> <%=rack.name %><%= tray.name %></p>
+                                <p><%= tray.data_sheets.where(current: true).first.strain.name %>(<%= tray.data_sheets.where(current: true).first.total_clone_count %>)</p>
+                              </div>
+                            </section>
+                          <% end %>                        
+                        <% else %>
+                          <%= link_to new_data_sheet_index_path(tray), class: "data-sheet-link tray-column card-container" do %>
+                            <section>
+                              <div class= "card">
+                                <p><%=rack.name %><%= tray.name %></p>
+                                <p>Empty</p>
+                              </div>
+                            </section>
+                          <% end %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to new_data_sheet_index_path(tray), class: "data-sheet-link tray-column card-container" do %>
+                            <section>
+                              <div class= "card">
+                                <p><%=rack.name %><%= tray.name %></p>
+                                <p>Empty</p>
+                              </div>
+                            </section>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+              <% end %>  
+            </section>
+          <% end %>
+          </section>
+        <% end %>
+      </div>
+    <% end %>
+  </section>  
+</div>

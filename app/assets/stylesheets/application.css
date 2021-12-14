@@ -247,7 +247,7 @@ input {
 
 .wrapper .main_content{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   margin-left: 225px;
   padding-top: 50px;
   position: relative;
@@ -352,3 +352,78 @@ input {
 .error-messages {
   color: red;
 }
+
+/* Data Sheet Cards */
+
+.datasheet-container {
+  width: 100%;
+  padding: 10px;
+}
+
+.datasheet-container h1{
+  text-align: center;
+}
+
+.rack-row {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.rack-column {
+  display: table-cell;
+  text-align: center;
+  padding: 2em;
+}
+
+.tray-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.tray-column {
+  display: table-cell;
+  text-align: center;
+  justify-content: center;
+}
+
+
+.card-container {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.card {
+  justify-content: center;
+  height: 80px;
+  background-color: #FAF0E6 !important;
+}
+
+.card-container section{
+}
+
+.card-container p{
+  justify-self: center;
+  margin-bottom: 0;
+}
+
+.card:hover {
+  z-index: 2;
+  background-color: black;
+  color: #01b8aa;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+  transform:  scale(1.20);
+  transition: all 0.3s ease-in-out;
+}
+
+.data-sheet-link {
+  text-decoration: none;
+  color: black;
+  min-width: 50px;
+}
+

@@ -1,0 +1,20 @@
+<div class= "content-container">
+  <%= form_for @clone_feed, as: :clone_feed, :url => {:controller => :clone_feeds, action: :update} do |f| %>
+    <h1>Clone Feed Information</h1>
+    <% if @clone_feed.errors.any? %>
+      <ul>
+        <% @clone_feed.errors.full_messages.each do |message| %>
+          <li class= "error-messages"><%= message %> </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= f.label :clone_feed_ph, "PH of Clone Feed" %>
+    <%= f.number_field :clone_feed_ph, value: @current_clone_feed.try(:clone_feed_ph), step: :any, placeholder: @current_clone_feed.try(:clone_feed_ph).to_f, required: true %>
+    <%= f.label :clone_feed_ec, "EC of Clone Feed" %>
+    <%= f.number_field :clone_feed_ec, value: @current_clone_feed.try(:clone_feed_ec), step: :any, placeholder: @current_clone_feed.try(:clone_feed_ec).to_f, required: true %>
+    <%= f.label :volume_per_tray, "Volume Poured Per Tray(mL)" %>
+    <%= f.number_field :volume_per_tray, value: @current_clone_feed.try(:volume_per_tray), placeholder: @current_clone_feed.try(:volume_per_tray), required: true %>
+
+    <%= f.submit 'Save Changes' %>
+  <% end %>
+</div>
