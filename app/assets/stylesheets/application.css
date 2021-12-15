@@ -298,6 +298,33 @@ input {
   color: black;
 }
 
+.main_content textarea {
+  font-family: "Josefin Sans", sans-serif;
+  text-decoration: none;
+  position: relative;
+  width: 400px;
+  display: block;
+  margin: 9px auto;
+  font-size: 17px;
+  color: #01b8aa;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #28383c;
+  text-align: center;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.main_content textarea:focus {
+  outline: none;
+  box-shadow: 3px 3px 10px #333;
+  background: #D3D3D3;
+  color: black;
+}
+
 .main_content input[type= "submit"] {
   margin-top: 40px;
   background: #01b8aa;
@@ -427,3 +454,76 @@ input {
   min-width: 50px;
 }
 
+/* Data Sheet Page */
+
+.data-sheet-header {
+  width: 100%;
+  text-align: center;
+}
+
+.data-sheet-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.data-sheet-column {
+  display: table-cell;
+  text-align: center;
+}
+
+.data-sheet-column h4{
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.data-sheet-column p{
+  font-size: 16px;
+}
+
+.data-entries-index {
+  padding-top: 50px;
+}
+
+.data-entries-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.data-entries-column {
+  display: table-cell;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.data-entries-column h4{
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.data-entries-column p{
+  font-size: 14px;
+}
+
+.tray-info {
+  padding-top: 15px;
+  padding-right: 5vw;
+  margin: 0;
+}
+
+.column-xsml {
+  width: 30px;
+}
+
+.column-sml {
+  width: 50px;
+}
+.column-lrg {
+  width: 10vw;
+}

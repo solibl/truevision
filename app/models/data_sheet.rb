@@ -4,4 +4,5 @@ class DataSheet < ApplicationRecord
   belongs_to :location
   belongs_to :strain
   has_many :data_entries
+  attr_accessor :note
 end

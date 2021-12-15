@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.boolean "marked_for_outlier", default: false
     t.integer "number_of_plants_killed"
     t.text "note"
-    t.string "reported_user"
     t.string "edited_user_initials"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

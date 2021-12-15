@@ -18,7 +18,6 @@ class CreateDataEntries < ActiveRecord::Migration[6.0]
       t.boolean :marked_for_outlier, default: false
       t.integer :number_of_plants_killed
       t.text :note
-      t.string :reported_user
       t.string :edited_user_initials
       t.timestamps
     end

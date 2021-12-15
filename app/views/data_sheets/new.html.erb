@@ -14,6 +14,8 @@
     <%= f.number_field :starting_total_clone_number, required: true %>
     <%= f.label :initial_soak_weight, "Initial Soak Weight(g)" %>
     <%= f.number_field :initial_soak_weight, required: true %>
+    <%= f.label :note, "Notes" %>
+    <%= f.text_area :note %>
     <%= f.hidden_field :tray_id, value: @tray.id %>
     <%= f.submit 'Save Changes' %>
   <% end %>

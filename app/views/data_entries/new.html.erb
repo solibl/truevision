@@ -1,1 +1,157 @@
-<p>Hi</p>
+<div class= "data-sheet-container">
+  <section>
+    <h1 class= "data-sheet-header">Datasheet For <%= @data_sheet.storage_rack.name %><%= @data_sheet.tray.name %></h1>
+    <section class= "tray-info">
+      <div class= "data-sheet-row">
+        <div class= "data-sheet-column">
+          <h4>Strain</h4>
+        </div>
+        <div class= "data-sheet-column">
+          <h4>Initial Weight(g)</h4>
+        </div>
+        <div class= "data-sheet-column">
+          <h4>Avg Grams Change</h4>
+        </div>
+        <div class= "data-sheet-column">
+          <h4>Current Count</h4>
+        </div>
+        <div class= "data-sheet-column">
+          <h4>Success Rate</h4>
+        </div>
+        <div class= "data-sheet-column">
+          <h4>Transplant Date</h4>
+        </div>
+      </div>
+      <div class= "data-sheet-row">
+        <div class= "data-sheet-column">
+          <p><%= @data_sheet.strain.name %></p>
+        </div>
+        <div class= "data-sheet-column">
+          <p><%= @data_sheet.initial_soak_weight %></p>
+        </div>
+        <div class= "data-sheet-column">
+          <% if @data_sheet.data_entries.average(:gram_difference).nil? %>
+            <p>N/A</p>
+          <% else %>
+            <p><%= @data_sheet.data_entries.average(:gram_difference) %></p>
+          <% end %>
+        </div>
+        <div class= "data-sheet-column">
+          <p><%= @data_sheet.total_clone_count %></p>
+        </div>
+        <div class= "data-sheet-column">
+          <p><%= (@data_sheet.total_clone_count/@data_sheet.starting_total_clone_number)*100 %>%</p>
+        </div>
+        <div class= "data-sheet-column">
+          <p><%= (@data_sheet.data_entries.order(:id).first.date+14.days).strftime("%m/%d/%Y") %></p>
+        </div>
+      </div>
+    </section>
+    <section class= "data-entries-index">
+      <div class= "data-entries-row">
+        <div class= "data-entries-column column-xsml">
+          <h4>Date</h4>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <h4>Day</h4>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <h4>Shift</h4>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <h4>Dry Back</h4>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <h4>DB Change</h4>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <h4>Feed</h4>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <h4>After Feed(g)</h4>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <h4>Domes</h4>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <h4>Roots</h4>
+        </div>
+        <div class= "data-entries-column column-lrg">
+          <h4>Notes</h4>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <h4>Initials</h4>
+        </div>
+      </div>
+      <div class= "data-entries-row">
+        <% @data_entries.each do |data_entry| %>
+        <div class= "data-entries-column column-xsml">
+          <p><%=data_entry.date.strftime("%m/%d") %></p>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <p><%=data_entry.day_count %></p>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <% if data_entry.shift.nil? %>
+            <p>N/A</p>
+          <% else %>
+            <p><%=data_entry.shift %></p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <% if data_entry.weight.nil? %>
+            <p>N/A</p>
+          <% else %>
+            <p><%=data_entry.weight %></p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <% if data_entry.gram_difference.nil? %>
+            <p>N/A</p>
+          <% else %>
+            <p><%=data_entry.gram_difference %></p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <% if data_entry.fed == true %>
+            <p>Y</p>
+          <% else %>
+            <p>N</p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <% if data_entry.weight_after_feed.nil? %>
+            <p>N/A</p>
+          <% else %>
+            <p><%=data_entry.weight_after_feed %></p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <% if data_entry.has_hood == true %>
+            <p>ON</p>
+          <% else %>
+            <p>OFF</p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <% if data_entry.grown_roots == true %>
+            <p>Y</p>
+          <% else %>
+            <p>N</p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-lrg">
+          <% if data_entry.note.nil? %>
+            <p>                                </p>
+          <% else %>
+            <p><%=data_entry.note %></p>
+          <% end %>          
+        </div>
+        <div class= "data-entries-column column-xsml">
+          <p><%=data_entry.user.initials %></p>
+        </div>
+        <% end %>
+      </div>      
+    </section>
+  </section>
+</div>
