@@ -302,8 +302,10 @@ input {
   font-family: "Josefin Sans", sans-serif;
   text-decoration: none;
   position: relative;
-  width: 400px;
+  width: 95%;
+  height: 120px;
   display: block;
+  padding: 10px;
   margin: 9px auto;
   font-size: 17px;
   color: #01b8aa;
@@ -329,6 +331,26 @@ input {
   margin-top: 40px;
   background: #01b8aa;
   color: #28383c;
+}
+
+.main_content select {
+  font-family: "Josefin Sans", sans-serif;
+  text-decoration: none;
+  position: relative;
+  width: 100px;
+  display: block;
+  margin: 9px auto;
+  font-size: 17px;
+  color: #01b8aa;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #28383c;
+  text-align: center;
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 /* Placeholders */
@@ -526,4 +548,34 @@ input {
 }
 .column-lrg {
   width: 10vw;
+}
+
+.data-entries-column input {
+  width: 100px;
+}
+.data-entries-column input[textarea] {
+  height: 400px;
+  width: 95%;
+}
+
+.data-entries-form {
+  padding-top: 40px;
+}
+
+.button-link {
+  background-color: #28383c;
+  color: #01b8aa;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+/* Watering Que Page */
+
+.watering-que-headers {
+  padding-top: 50px;
+}
+
+.watering-que-form h2 {
+  text-decoration: underline;
 }

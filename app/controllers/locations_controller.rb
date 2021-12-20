@@ -78,7 +78,7 @@ class LocationsController < ApplicationController
   end
 
   def location_params
-    params.require(:location).permit(:name, :total_rack, :total_tray_per_rack, :trays_per_storage_row, :total_hood_days)
+    params.require(:location).permit(:name, :total_rack, :total_tray_per_rack, :trays_per_storage_row, :total_hood_days, :entry_per_day)
   end
 
 end

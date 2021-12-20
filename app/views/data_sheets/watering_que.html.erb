@@ -1,0 +1,51 @@
+<div class= "content-container">
+  <h1>Watering Que</h1>
+  <section>
+    <% if @watering_que.any? %>
+      <div class= "watering-que-headers">
+        <div class= "data-entries-row">
+          <div class= "data-entries-column column-lrg">
+            <h2>
+              Tray
+            </h2>
+          </div>
+          <div class= "data-entries-column column-lrg">
+            <h2>
+              After Feed DB Weight(g)
+            </h2>
+          </div>
+        </div>    
+      </div>
+      <% @watering_que.each do |watering_que_sheet| %>
+        <div class= "watering-que-form">        
+          <%= form_for watering_que_sheet, url: update_data_entry_path(watering_que_sheet), method: :update do |f| %>
+          <div class= "data-entries-row">
+            <% if watering_que_sheet.errors.any? %>
+              <ul>
+                <% watering_que_sheet.errors.full_messages.each do |message| %>
+                  <li class= "error-messages"><%= message %> </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <div class= "data-entries-row">
+            <div class= "data-entries-column column-lrg">
+              <h3>
+                <%= watering_que_sheet.data_sheet.storage_rack.name %><%= watering_que_sheet.data_sheet.tray.name %>
+              </h3>
+            </div>
+            <div class= "data-entries-column column-lrg">
+              <%= f.number_field :weight_after_feed, required: true %>
+              <%= f.submit 'Enter' %>
+            </div>         
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+    <h3>
+      There are currently no trays in the watering que.
+    </h3>
+    <% end %>
+  </section>
+</div>

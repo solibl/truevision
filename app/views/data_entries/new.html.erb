@@ -30,17 +30,17 @@
           <p><%= @data_sheet.initial_soak_weight %></p>
         </div>
         <div class= "data-sheet-column">
-          <% if @data_sheet.data_entries.average(:gram_difference).nil? %>
+          <% if @data_sheet.data_entries.where(has_hood: false).average(:gram_difference).nil? %>
             <p>N/A</p>
           <% else %>
-            <p><%= @data_sheet.data_entries.average(:gram_difference) %></p>
+            <p><%= @data_sheet.data_entries.where(has_hood: false).average(:gram_difference) %></p>
           <% end %>
         </div>
         <div class= "data-sheet-column">
           <p><%= @data_sheet.total_clone_count %></p>
         </div>
         <div class= "data-sheet-column">
-          <p><%= (@data_sheet.total_clone_count/@data_sheet.starting_total_clone_number)*100 %>%</p>
+          <p><%= ((@data_sheet.total_clone_count.to_f / @data_sheet.starting_total_clone_number) * 100).round(0) %>%</p>
         </div>
         <div class= "data-sheet-column">
           <p><%= (@data_sheet.data_entries.order(:id).first.date+14.days).strftime("%m/%d/%Y") %></p>
@@ -59,13 +59,16 @@
           <h4>Shift</h4>
         </div>
         <div class= "data-entries-column column-sml">
-          <h4>Dry Back</h4>
+          <h4>DB Weight(g)</h4>
         </div>
         <div class= "data-entries-column column-sml">
           <h4>DB Change</h4>
         </div>
         <div class= "data-entries-column column-xsml">
           <h4>Feed</h4>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <h4>Clone PH/EC</h4>
         </div>
         <div class= "data-entries-column column-sml">
           <h4>After Feed(g)</h4>
@@ -83,8 +86,8 @@
           <h4>Initials</h4>
         </div>
       </div>
-      <div class= "data-entries-row">
-        <% @data_entries.each do |data_entry| %>
+      <% @data_entries.each do |data_entry| %>
+        <div class= "data-entries-row">
         <div class= "data-entries-column column-xsml">
           <p><%=data_entry.date.strftime("%m/%d") %></p>
         </div>
@@ -114,9 +117,17 @@
         </div>
         <div class= "data-entries-column column-xsml">
           <% if data_entry.fed == true %>
-            <p>Y</p>
+            <p>Yes</p>
           <% else %>
-            <p>N</p>
+            <p>No</p>
+          <% end %>
+        </div>
+        <div class= "data-entries-column column-sml">
+          <% if data_entry.fed == false %>
+            <p>N/A</p>
+          <% else %>
+            <p>PH: <%= data_entry.clone_feed_ph %></p>
+            <p>EC: <%= data_entry.clone_feed_ec %></p>
           <% end %>
         </div>
         <div class= "data-entries-column column-sml">
@@ -128,16 +139,16 @@
         </div>
         <div class= "data-entries-column column-xsml">
           <% if data_entry.has_hood == true %>
-            <p>ON</p>
+            <p>On</p>
           <% else %>
-            <p>OFF</p>
+            <p>Off</p>
           <% end %>
         </div>
         <div class= "data-entries-column column-xsml">
           <% if data_entry.grown_roots == true %>
-            <p>Y</p>
+            <p>Yes</p>
           <% else %>
-            <p>N</p>
+            <p>No</p>
           <% end %>
         </div>
         <div class= "data-entries-column column-lrg">
@@ -150,8 +161,125 @@
         <div class= "data-entries-column column-xsml">
           <p><%=data_entry.user.initials %></p>
         </div>
-        <% end %>
-      </div>      
+        </div>      
+      <% end %>
+    </section>
+    <section class= "data-entries-form" id= "data-entries-form">
+      <% if @data_sheet.status == "Watering" %>
+        <div class= "data-entries-row">
+          <div class= "data-entries-column">
+            <h3>
+              Your tray is in the watering que.
+            </h3>
+            <h3>
+              Please record weight after draining.
+            </h3>
+          </div>
+        </div>
+        <div class= "data-entries-row">
+          <div class= "data-entries-column">
+            <%= link_to watering_que_path do %>
+              <button class= "button-link">
+                Watering Que 
+                <i class= "fas fa-hand-holding-water"></i>
+                <span class= "badge"><%= @data_sheets_watering_que.any? ? @data_sheets_watering_que.count : 0 %></span>              
+              </button>
+            <% end %>
+          </div>
+          <% if @next_data_sheet.any? %>
+            <div class= "data-entries-column">
+              <%= link_to new_data_entry_path(@next_data_sheet.first) do %>
+                <button class= "button-link">
+                  Go To Next Data Entry            
+                </button>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% elsif @entry_limit == true %>
+        <div>
+          <div class= "data-entries-row">
+            <div class= "data-entries-column">
+              <h3>
+                No More Entries For Today
+              </h3>
+              <% if @next_data_sheet.any? %>
+                <%= link_to new_data_entry_path(@next_data_sheet.first) do %>
+                  <button class= "button-link">
+                    Go To Next Data Entry            
+                  </button>
+                <% end %>
+              <% end %>              
+            </div>
+          </div>          
+        </div>
+      <% else %>
+        <div>        
+          <%= form_for @new_data_entry, as: :data_entry, :url => {:controller => :data_entries, action: :create} do |f| %>
+          <div class= "data-entries-row">
+            <% if @new_data_entry.errors.any? %>
+              <ul>
+                <% @new_data_entry.errors.full_messages.each do |message| %>
+                  <li class= "error-messages"><%= message %> </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <div class= "data-entries-row">
+            <div class= "data-entries-column">
+              <%= f.label :weight, "DB Weight(g)" %>
+            </div>
+            <div class= "data-entries-column">
+              <%= f.label :number_of_plants_killed, "Number Of Clones Killed" %>
+            </div>
+            <% if @last_data_entry.grown_roots == false %>
+            <div class="data-entries-column">
+              <%= f.label :grown_roots, "Has Roots?" %>
+            </div>
+            <% elsif @last_data_entry.grown_roots == true && @last_data_entry.grown_roots_less_than_inch == false %>
+            <div class="data-entries-column">
+              <%= f.label :grown_roots_less_than_inch, "Has Full Tray( < 0.5 in)" %>
+            </div>
+            <% elsif @last_data_entry.grown_roots == true && @last_data_entry.grown_roots_less_than_inch == true  && @last_data_entry.grown_roots_greater_than_inch == false %>
+            <div class="data-entries-column">
+              <%= f.label :grown_roots_greater_than_inch, "Has Full Tray( > 0.5 in)" %>
+            </div>
+            <% else %>        
+            <% end %> 
+            <div class= "data-entries-column">
+              <%= f.label :note, "Notes" %>
+            </div>
+          </div>
+          <div class= "data-entries-row">
+            <div class= "data-entries-column">
+              <%= f.text_field :weight, required: true %>
+            </div>
+            <div class= "data-entries-column">
+              <%= f.text_field :number_of_plants_killed, value: 0, placeholder: 0, required: true %>
+            </div>
+            <% if @last_data_entry.grown_roots == false %>
+            <div class="data-entries-column">
+              <%= f.select :grown_roots, options_for_select([["No", false], ["Yes", true]]), required: true %>            
+            </div>
+            <% elsif @last_data_entry.grown_roots == true && @last_data_entry.grown_roots_less_than_inch == false %>
+            <div class="data-entries-column">
+              <%= f.select :grown_roots_less_than_inch, options_for_select([["No", false], ["Yes", true]]), required: true %>            
+            </div>
+            <% elsif @last_data_entry.grown_roots == true && @last_data_entry.grown_roots_less_than_inch == true  && @last_data_entry.grown_roots_greater_than_inch == false %>
+            <div class="data-entries-column">
+              <%= f.hidden_field :grown_roots_less_than_inch, value: true %>
+              <%= f.select :grown_roots_greater_than_inch, options_for_select([["No", false], ["Yes", true]]), required: true %>            
+            </div>
+            <% else %>        
+            <% end %> 
+            <div class= "data-entries-column">
+              <%= f.text_area :note %>
+            </div>
+          </div>
+            <%= f.submit 'Enter' %>
+          <% end %>
+        </div>
+      <% end %>
     </section>
   </section>
 </div>

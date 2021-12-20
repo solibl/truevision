@@ -1,2 +1,0 @@
-class CloneFeedDaysController < ApplicationController
-end

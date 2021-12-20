@@ -29,10 +29,10 @@ class DataSheetsController < ApplicationController
       @data_entry = DataEntry.new
       @data_entry.location_id = @location.id
       @data_entry.data_sheet_id = @data_sheet.id
-      @data_entry.date = DateTime.now
+      @data_entry.date = DateTime.now.midnight
       @data_entry.day_count = 1
       @data_entry.shift = "AM"
-      @data_entry.fed = "N/A"
+      @data_entry.fed = false
       @data_entry.user_id = current_user.id
       @data_entry.note = data_sheet_params[:note]
       if @data_entry.save
@@ -41,7 +41,14 @@ class DataSheetsController < ApplicationController
     else
       redirect_to new_data_sheet_index_path(@tray)
     end
+  end
 
+  def watering_que
+    @data_sheets = DataSheet.where(status: "Watering")
+    @watering_que = []
+    @data_sheets.each do |data_sheet|
+      @watering_que << data_sheet.data_entries.last
+    end
   end
 
   def data_sheet_params

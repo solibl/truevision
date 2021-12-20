@@ -28,15 +28,16 @@
               <% end %>
             </li>
             <li>
-              <a href= "#">Watering Que 
-              <i class= "fas fa-hand-holding-water"></i>
-              <span class= "badge"><%= @data_sheets_watering_que.empty? ? @data_sheets_watering_que.count : 0 %></span>
-              </a>
+              <%= link_to watering_que_path do %>
+                Watering Que 
+                <i class= "fas fa-hand-holding-water"></i>
+                <span class= "badge"><%= @data_sheets_watering_que.any? ? @data_sheets_watering_que.count : 0 %></span>
+              <% end %>
             </li>
             <li>
               <a href= "#">Transplant Que 
               <i class= "fas fa-tree"></i>
-              <span class= "badge"><%= @data_sheets_watering_que.empty? ? @data_sheets_watering_que.count : 0 %></span>
+              <span class= "badge"><%= @data_sheets_transplanting_que.any? ? @data_sheets_transplanting_que.count : 0 %></span>
               </a>
             </li>
             <li>

@@ -17,10 +17,16 @@ Rails.application.routes.draw do
   post  'edit_clone_feed', to: 'clone_feeds#update'
 
   #Data Sheets
-  get 'data_sheet_index', to: 'data_sheets#index'
-  get 'new_data_sheet_index/:tray', to: 'data_sheets#new', as: 'new_data_sheet_index'
-  post 'new_data_sheet_index/:tray', to: 'data_sheets#create'
+  get 'data-sheet-index', to: 'data_sheets#index'
+  get 'new-data-sheet-index/:tray', to: 'data_sheets#new', as: 'new_data_sheet_index'
+  post 'new-data-sheet-index/:tray', to: 'data_sheets#create'
 
   #Data Entries
-  get 'data_sheet/:data_sheet', to: 'data_entries#new', as: 'new_data_entry'
+  get 'data-sheet/:data_sheet', to: 'data_entries#new', as: 'new_data_entry'
+  post  'new-data-entry/:data_sheet', to: 'data_entries#create'
+
+
+  #Watering Que
+  get 'watering-que', to: 'data_sheets#watering_que'
+  patch 'update-data-entry/:data_sheet', to: 'data_entries#update', as: 'update_data_entry'
 end

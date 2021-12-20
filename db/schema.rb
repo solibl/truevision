@@ -15,26 +15,12 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "clone_feed_days", force: :cascade do |t|
-    t.integer "clone_feed_day"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "clone_feed_plant_numbers", force: :cascade do |t|
-    t.string "number_of_clones"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "clone_feed_schedules", force: :cascade do |t|
-    t.bigint "clone_feed_plant_number_id"
-    t.bigint "clone_feed_day_id"
+    t.integer "clone_feed_plant_number"
+    t.integer "clone_feed_day"
     t.integer "minimum_feed_weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["clone_feed_day_id"], name: "index_clone_feed_schedules_on_clone_feed_day_id"
-    t.index ["clone_feed_plant_number_id"], name: "index_clone_feed_schedules_on_clone_feed_plant_number_id"
   end
 
   create_table "clone_feeds", force: :cascade do |t|
@@ -59,12 +45,14 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.string "shift"
     t.integer "weight"
     t.integer "gram_difference"
-    t.string "fed"
+    t.boolean "fed", default: false
     t.decimal "clone_feed_ph"
     t.decimal "clone_feed_ec"
     t.integer "weight_after_feed"
     t.boolean "has_hood", default: true
     t.boolean "grown_roots", default: false
+    t.boolean "grown_roots_less_than_inch", default: false
+    t.boolean "grown_roots_greater_than_inch", default: false
     t.boolean "marked_for_outlier", default: false
     t.integer "number_of_plants_killed"
     t.text "note"
@@ -104,6 +92,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.integer "trays_per_storage_row"
+    t.integer "entry_per_day"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "total_rack"
@@ -163,8 +152,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "clone_feed_schedules", "clone_feed_days"
-  add_foreign_key "clone_feed_schedules", "clone_feed_plant_numbers"
   add_foreign_key "clone_feeds", "locations"
   add_foreign_key "clone_feeds", "users"
   add_foreign_key "data_entries", "data_sheets"
