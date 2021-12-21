@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.boolean "grown_roots_greater_than_inch", default: false
     t.boolean "marked_for_outlier", default: false
     t.integer "number_of_plants_killed"
+    t.boolean "manual_feed", default: false
     t.text "note"
     t.string "edited_user_initials"
     t.datetime "created_at", precision: 6, null: false
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.integer "total_clone_count"
     t.integer "ending_clone_total_number"
     t.integer "first_initial_dry_back"
+    t.integer "first_initial_dry_back_day_count"
     t.integer "average_gram_difference"
     t.decimal "success_rate"
     t.boolean "marked_for_outlier", default: false

@@ -10,11 +10,9 @@ class CloneFeedsController < ApplicationController
     if @clone_feed.nil?
       @clone_feed = CloneFeed.new
     end
-    p @clone_feed
     @clone_feed.user = current_user
     @clone_feed.location = current_user.location
-    date = DateTime.now
-    @clone_feed.date = date.strftime("%m/%d/%Y")
+    @clone_feed.date = DateTime.now.midnight
     if @clone_feed.update(clone_feed_params)
       redirect_to root_path, notice: "Clone feed has been updated."
     # Handle a successful update.

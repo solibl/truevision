@@ -19,6 +19,7 @@ class CreateDataEntries < ActiveRecord::Migration[6.0]
       t.boolean :grown_roots_greater_than_inch, default: false
       t.boolean :marked_for_outlier, default: false
       t.integer :number_of_plants_killed
+      t.boolean :manual_feed, default: false
       t.text :note
       t.string :edited_user_initials
       t.timestamps

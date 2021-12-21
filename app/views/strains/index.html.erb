@@ -1,0 +1,24 @@
+<div class= "content-container">
+  <section class= "strain-section">
+    <div>
+      <h1>Strains</h1>
+    </div>
+    <% @strains_names.in_groups_of(2, false).each do |group_strains| %>
+      <div class= "rack-row">
+        <% group_strains.each do |strain| %>
+        <section class= "rack-column column-lrg">
+          <section class= "strain-row">
+            <%= link_to strain_path(@strains.where(name: strain).first), class: "data-sheet-link tray-column card-container" do %>
+              <section>
+                <div class= "card strain-card">
+                  <p> <%= strain %></p>
+                </div>
+              </section>
+            <% end %>
+          </section>
+        </section>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</div>

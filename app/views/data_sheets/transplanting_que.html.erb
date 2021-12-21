@@ -1,0 +1,52 @@
+<div class= "content-container">
+  <section>
+    <h1>Transplanting Que</h1>
+  </section>
+  <section>
+    <% if @transplanting_que.any? %>
+      <div class= "transplanting-que-headers">
+        
+      </div>
+      <div class= "data-sheet-row">
+        <div class= "data-sheet-column column-xsml">
+          <h2>Strain</h2> 
+        </div>
+        <div class= "data-sheet-column column-xsml">
+          <h2>Total Amount</h2> 
+        </div>
+        <div class= "data-sheet-column column-xsml">
+          <h2>Locations</h2> 
+        </div>
+        <div class= "data-sheet-column column-xsml">
+          <h2></h2> 
+        </div>
+      </div>
+      <% @transplanting_que.each do |strain| %>
+        <div class= "data-sheet-row">
+          <div class= "data-sheet-column column-xsml tranplanting-index">
+            <h3><%= strain[0] %></h3>  
+          </div>
+          <div class= "data-sheet-column column-xsml tranplanting-index">
+            <h3><%= strain[1] %></h3>  
+          </div>
+          <div class= "data-sheet-column column-xsml tranplanting-index">
+            <% strain[2].each do |location| %>
+            <h3><%= location %></h3>
+            <% end %>
+          </div>
+          <div class= "data-sheet-column column-xsml">
+            <%= link_to update_data_sheet_transplanted_path(strain[0].to_i), method: :post do %>
+              <button class= "button-link">
+                Completed Transplant        
+              </button>
+            <% end %>    
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+    <div>
+      <h3>There are currently no trays in the transplanting que.</h3>
+    </div>
+    <% end %>
+  </section>
+</div>

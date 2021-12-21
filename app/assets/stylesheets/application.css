@@ -402,6 +402,11 @@ input {
   color: red;
 }
 
+.clone-feed-header {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 /* Data Sheet Cards */
 
 .datasheet-container {
@@ -505,6 +510,10 @@ input {
   font-size: 16px;
 }
 
+.data-entry-header {
+  padding-top: 50px;
+}
+
 .data-entries-index {
   padding-top: 50px;
 }
@@ -578,4 +587,56 @@ input {
 
 .watering-que-form h2 {
   text-decoration: underline;
+}
+
+/* Transplanting Que Page */
+
+.transplanting-que-headers {
+  padding-top: 50px;
+}
+
+.home-content {
+  padding: 50px;
+}
+
+/* Strains */
+.strain-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 10px;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+  justify-content: center;
+}
+
+.strain-section {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.strain-sheet-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.strain-sheet-column {
+  display: table-cell;
+  text-align: center;
+}
+
+.strain-sheet-column h4{
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+.strain-sheet-column p{
+  font-size: 16px;
+}
+
+.strain-sheet-header {
+  padding-top: 50px;
 }

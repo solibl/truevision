@@ -11,18 +11,28 @@
           </div>
           <div class= "data-entries-column column-lrg">
             <h2>
+              Strain
+            </h2>
+          </div>
+          <div class= "data-entries-column column-lrg">
+            <h2>
               After Feed DB Weight(g)
+            </h2>
+          </div>
+          <div class= "data-entries-column column-lrg">
+            <h2>
+              
             </h2>
           </div>
         </div>    
       </div>
-      <% @watering_que.each do |watering_que_sheet| %>
+      <% @watering_que.each do |watering_que_data_entry| %>
         <div class= "watering-que-form">        
-          <%= form_for watering_que_sheet, url: update_data_entry_path(watering_que_sheet), method: :update do |f| %>
+          <%= form_for watering_que_data_entry, as: :data_entry, url: update_data_entry_path, method: :update do |f| %>
           <div class= "data-entries-row">
-            <% if watering_que_sheet.errors.any? %>
+            <% if watering_que_data_entry.errors.any? %>
               <ul>
-                <% watering_que_sheet.errors.full_messages.each do |message| %>
+                <% watering_que_data_entry.errors.full_messages.each do |message| %>
                   <li class= "error-messages"><%= message %> </li>
                 <% end %>
               </ul>
@@ -31,12 +41,21 @@
           <div class= "data-entries-row">
             <div class= "data-entries-column column-lrg">
               <h3>
-                <%= watering_que_sheet.data_sheet.storage_rack.name %><%= watering_que_sheet.data_sheet.tray.name %>
+                <%= watering_que_data_entry.data_sheet.storage_rack.name %><%= watering_que_data_entry.data_sheet.tray.name %>
               </h3>
             </div>
             <div class= "data-entries-column column-lrg">
-              <%= f.number_field :weight_after_feed, required: true %>
-              <%= f.submit 'Enter' %>
+              <h3>
+                <%= watering_que_data_entry.data_sheet.strain.name %>(<%= watering_que_data_entry.data_sheet.total_clone_count %>)
+              </h3>
+            </div>
+            <div class= "data-entries-column column-lrg">
+                <%= f.number_field :weight_after_feed, required: true %>
+                <%= f.hidden_field :id, value: watering_que_data_entry.id, required: true %>
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            </div>         
+            <div class= "data-entries-column column-lrg">
+                <%= f.submit 'Enter' %>
             </div>         
           </div>
           <% end %>

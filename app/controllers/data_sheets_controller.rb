@@ -3,7 +3,14 @@ class DataSheetsController < ApplicationController
   def index
     @racks = StorageRack.where(current: true) 
     @location = current_user.location
-
+    @clone_feed = CloneFeed.where(location: current_user.location).first
+    if @clone_feed.nil? == true
+      redirect_to edit_clone_feed_path
+    else
+      if @clone_feed.date != DateTime.now.midnight
+        redirect_to edit_clone_feed_path
+      end
+    end
   end
 
   def new
@@ -49,6 +56,57 @@ class DataSheetsController < ApplicationController
     @data_sheets.each do |data_sheet|
       @watering_que << data_sheet.data_entries.last
     end
+  end
+
+  def transplanting_que
+    @data_sheets = DataSheet.where(status: "Transplanting")
+    @transplanting_que = []
+    @locations_for_strains = []
+    @data_sheets.each do |data_sheet|
+      if @transplanting_que.include?(data_sheet.strain.name) == false
+        @data_sheets.where(strain: data_sheet.strain).each do |data_sheet_locations|
+          if @locations_for_strains.include?(data_sheet_locations.storage_rack.name + data_sheet_locations.tray.name.to_s) == false
+            @locations_for_strains << data_sheet_locations.storage_rack.name + data_sheet_locations.tray.name.to_s
+          end
+        end
+        @transplanting_que << [data_sheet.strain.name, @data_sheets.where(strain: data_sheet.strain).sum(:total_clone_count), @locations_for_strains]
+      end
+    end
+    @transplanting_que = @transplanting_que.uniq
+  end
+
+  def update_transplanting_que
+    @data_sheet = DataSheet.find(params[:data_sheet])
+    @data_sheet.status = "Transplanting"
+    @data_sheet.save
+    redirect_to transplanting_que_path
+  end
+
+  def update_transplanted
+    @data_sheet = DataSheet.where(strain: Strain.where(name: params[:strain].to_i))
+    @data_sheet.each do |data_sheet|
+      data_sheet.current = false
+      data_sheet.status = "Completed"
+      data_sheet.save
+    end
+    redirect_to transplanting_que_path
+  end
+
+  def kill_tray
+    @data_sheet = DataSheet.find(params[:data_sheet])
+    @data_sheet.status = "Completed"
+    @data_sheet.current = false
+    @data_sheet.marked_for_outlier = true
+    @data_sheet.total_clone_count = 0
+    @data_sheet.save
+    redirect_to data_sheet_index_path
+  end
+  
+  def mark_sheet_for_outlier
+    @data_sheet = DataSheet.find(params[:data_sheet])
+    @data_sheet.marked_for_outlier = true
+    @data_sheet.save
+    redirect_to new_data_entry_path(@data_sheet)  
   end
 
   def data_sheet_params

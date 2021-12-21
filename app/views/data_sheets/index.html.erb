@@ -16,7 +16,7 @@
                     <% if !tray.nil? %>
                       <% if tray.data_sheets != [] %>
                         <% if tray.data_sheets.where(current: true) != [] %>
-                          <%= link_to new_data_entry_path(tray.data_sheets.ids), class: "data-sheet-link tray-column card-container" do %>
+                          <%= link_to new_data_entry_path(tray.data_sheets.where(current: true).ids), class: "data-sheet-link tray-column card-container" do %>
                             <section>
                               <div class= "card">
                                 <p> <%=rack.name %><%= tray.name %></p>

@@ -35,10 +35,11 @@
               <% end %>
             </li>
             <li>
-              <a href= "#">Transplant Que 
-              <i class= "fas fa-tree"></i>
-              <span class= "badge"><%= @data_sheets_transplanting_que.any? ? @data_sheets_transplanting_que.count : 0 %></span>
-              </a>
+              <%= link_to transplanting_que_path do %>
+                Transplanting Que 
+                <i class= "fas fa-tree"></i>
+                <span class= "badge"><%= @data_sheets_transplanting_que.any? ? @data_sheets_transplanting_que.count : 0 %></span>
+              <% end %>
             </li>
             <li>
               <%= link_to edit_clone_feed_path do %>
@@ -47,7 +48,9 @@
             </li>
             <% if current_user.authorization_level == "Admin" %>
             <li>
-              <a href= "#">Strains <i class= "fas fa-cannabis"></i></a>
+              <%= link_to strain_index_path do %>
+              Strains <i class= "fas fa-cannabis"></i>
+              <% end %>
             </li>
             <li>
               <%= link_to edit_location_path do %>

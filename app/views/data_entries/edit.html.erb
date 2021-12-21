@@ -1,0 +1,22 @@
+<div class= "content-container">
+    <h1>Data Entry Information</h1>
+    <div class= "data-entry-header">
+    </div>
+  <%= form_for @data_entry, as: :data_entry, :url => {:controller => :data_entries, action: :edit_update} do |f| %>
+    <% if @data_entry.errors.any? %>
+      <ul>
+        <% @data_entry.errors.full_messages.each do |message| %>
+          <li class= "error-messages"><%= message %> </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= f.label :weight, "DB Weight(g)" %>
+    <%= f.number_field :weight, value: @data_entry.try(:weight), placeholder: @data_entry.try(:weight) %>
+    <%= f.label :number_of_plants_killed, "Number Of Clones Killed" %>
+    <%= f.number_field :number_of_plants_killed, value: @data_entry.try(:number_of_plants_killed), placeholder: @data_entry.try(:number_of_plants_killed) %>
+    <%= f.label :note, "Notes" %>
+    <%= f.text_area :note, value: @data_entry.try(:note), placeholder: @data_entry.try(:note) %>
+    <%= f.hidden_field :id, value: @data_entry.try(:id), required: true %>    
+    <%= f.submit 'Save Changes' %>
+  <% end %>
+</div>

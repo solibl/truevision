@@ -1,0 +1,73 @@
+<div class= "content-container">
+  <section>
+    <div>
+      <h1><%= @strain.name %></h1>
+    </div>
+    <div class= "strain-sheet-header">
+      <div class= "strain-sheet-row">
+        <div class= "strain-sheet-column column-sml">
+          <h4>Optimal First Dryback</h4>
+        </div>
+        <div class= "strain-sheet-column column-sml">
+          <h4>Current Total Plants</h4>
+        </div>
+        <div class= "strain-sheet-column column-sml">
+          <h4>Current Locations</h4>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class= "strain-sheet-row">
+        <div class= "strain-sheet-column column-sml">
+          <% if !@best_dryback.nil? %>
+            <p><%= @best_dryback.first_initial_dry_back %></p>
+          <% else %>
+            <p>N/A</p>
+          <% end %>
+        </div>
+        <div class= "strain-sheet-column column-sml">
+          <% if !@active_count.nil? %>
+            <p><%= @active_count %></p>
+          <% else %>
+            <p></p>
+          <% end %>
+        </div>
+        <div class= "strain-sheet-column column-sml">
+          <% if @locations_for_strains != [] %>
+            <% @locations_for_strains.each do |location| %>
+              <p><%= location %></p>
+            <% end %>
+          <% else %>
+            <p>None</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class= "strain-sheet-header">
+      <div class= "strain-sheet-row">
+        <div class= "strain-sheet-column">
+          <h4>Record Date</h4>
+        </div>        
+        <div class= "strain-sheet-column">
+          <h4></h4>
+        </div>        
+      </div>
+      <% @data_sheets.each do |data_sheet| %>
+        <div class= "strain-sheet-row">
+          <div class= "strain-sheet-column">
+            <p><%= data_sheet.data_entries.first.date.strftime("%m/%d/%Y") %> - <%= data_sheet.data_entries.last.date.strftime("%m/%d/%Y") %></p>
+          </div>        
+          <div class= "strain-sheet-column">
+            <%= link_to new_data_entry_path(data_sheet), method: :get do %>
+              <button class= "button-link">
+                View Datasheet       
+              </button>
+            <% end %>  
+          </div>        
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>

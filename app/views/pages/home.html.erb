@@ -1,4 +1,34 @@
 <div class="content-container">
   <h1>Welcome <%= current_user.first_name %></h1>
   <p id="notice"><%= notice %></p>
+  <div class= "home-content">
+    <% if @clone_feed_done_today == false %>
+      <h3>Start Your Data Entries Below</h3>
+      <%= link_to edit_clone_feed_path do %>
+        <button class= "button-link">
+          Set Your Clone Feed For The Day           
+        </button>
+      <% end %>
+    <% else %>
+      <h3>Your clone feed has already been set for today.</h3>
+      <h3>Any brand new clone feed made needs to be updated below.</h3>
+      <%= link_to edit_clone_feed_path do %>
+        <button class= "button-link">
+          Set Your Clone Feed For The Day           
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+  <div class= "home-content">
+    <% if @next_data_sheet.any? %>
+      <h3>Start Your Data Entries Below</h3>
+      <%= link_to new_data_entry_path(@next_data_sheet.first) do %>
+        <button class= "button-link">
+          Go To Next Data Entry            
+        </button>
+      <% end %>
+    <% else %>
+      <h3>Clone data entries are finished for today.</h3>
+    <% end %>  
+  </div>
 </div>

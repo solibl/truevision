@@ -1,6 +1,10 @@
 <div class= "content-container">
-  <%= form_for @clone_feed, as: :clone_feed, :url => {:controller => :clone_feeds, action: :update} do |f| %>
     <h1>Clone Feed Information</h1>
+    <div class= "clone-feed-header">
+      <h3>Set PH Range: 5.6-5.8</h3>
+      <h3>Set EC: 0.6</h3>
+    </div>
+  <%= form_for @clone_feed, as: :clone_feed, :url => {:controller => :clone_feeds, action: :update} do |f| %>
     <% if @clone_feed.errors.any? %>
       <ul>
         <% @clone_feed.errors.full_messages.each do |message| %>
