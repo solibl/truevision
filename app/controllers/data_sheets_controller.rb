@@ -51,7 +51,7 @@ class DataSheetsController < ApplicationController
   end
 
   def watering_que
-    @data_sheets = DataSheet.where(status: "Watering")
+    @data_sheets = DataSheet.where(status: "Watering", location: current_user.location)
     @watering_que = []
     @data_sheets.each do |data_sheet|
       @watering_que << data_sheet.data_entries.last
@@ -59,7 +59,7 @@ class DataSheetsController < ApplicationController
   end
 
   def transplanting_que
-    @data_sheets = DataSheet.where(status: "Transplanting")
+    @data_sheets = DataSheet.where(status: "Transplanting", location: current_user.location)
     @transplanting_que = []
     @locations_for_strains = []
     @data_sheets.each do |data_sheet|

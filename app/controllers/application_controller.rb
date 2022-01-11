@@ -9,11 +9,18 @@ class ApplicationController < ActionController::Base
   end
 
   def get_data_sheets_watering_que
-    @data_sheets_watering_que = DataSheet.where(status: "Watering")
+    if user_signed_in?
+      @data_sheets_watering_que = DataSheet.where(status: "Watering", location: current_user.location)
+    else
+      @data_sheets_watering_que = []
+    end
   end
 
   def get_data_sheets_transplanting_que
-    @data_sheets_transplanting_que = DataSheet.where(status: "Transplanting")
-    
+    if user_signed_in?
+      @data_sheets_transplanting_que = DataSheet.where(status: "Transplanting", location: current_user.location)
+    else
+      @data_sheets_transplanting_que = []
+    end
   end
 end
