@@ -54,6 +54,10 @@ class DataEntriesController < ApplicationController
     if @new_data_entry.day_count > current_user.location.total_hood_days
       @new_data_entry.has_hood = false
     end
+    if @new_data_entry.grown_roots == true && @new_data_entry.data_sheet.first_day_roots == nil
+      @new_data_entry.data_sheet.first_day_roots == @new_data_entry.day_count
+
+    end
     if @last_data_entry.grown_roots == true
       @new_data_entry.grown_roots = true
     end
@@ -103,13 +107,13 @@ class DataEntriesController < ApplicationController
     @index_of_data_entries = @data_entry.data_sheet.data_entries.order(:id)
     @placing_of_last_data_entry = @index_of_data_entries.find_index(@data_entry)
     @last_data_entry = @index_of_data_entries[@placing_of_last_data_entry-1]
+    @data_entry.edited_user_initials = current_user.initials
     if !data_entries_params[:weight] == ""
       if !@last_data_entry.weight_after_feed.nil?
         @data_entry.gram_difference = @last_data_entry.weight_after_feed - data_entries_params[:weight].to_i
       else
         @data_entry.gram_difference = @last_data_entry.weight - data_entries_params[:weight].to_i
       end
-      @data_entry.edited_user_initials = current_user.initials
       if @data_entry.gram_difference < 0
         @data_entry.gram_difference = nil
       end

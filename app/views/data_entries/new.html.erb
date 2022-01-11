@@ -155,7 +155,7 @@
           <% else %>
             <p>No</p>
           <% end %>
-          <% if data_entry.fed == false && data_entry.day_count != 1 %>
+          <% if data_entry.fed == false && data_entry.day_count != 1 && data_entry.date == DateTime.now.midnight %>
             <%= link_to manual_feed_path(data_entry.data_sheet), method: :post do %>
               <button class= "button-link">
                 Manual        
@@ -290,11 +290,11 @@
               </div>
               <% elsif @last_data_entry.grown_roots == true && @last_data_entry.grown_roots_less_than_inch == false %>
               <div class="data-entries-column">
-                <%= f.label :grown_roots_less_than_inch, "Has Full Tray( < 0.5 in)" %>
+                <%= f.label :grown_roots_less_than_inch, "Has Full Tray Roots( < 0.5 in)" %>
               </div>
               <% elsif @last_data_entry.grown_roots == true && @last_data_entry.grown_roots_less_than_inch == true  && @last_data_entry.grown_roots_greater_than_inch == false %>
               <div class="data-entries-column">
-                <%= f.label :grown_roots_greater_than_inch, "Has Full Tray( > 0.5 in)" %>
+                <%= f.label :grown_roots_greater_than_inch, "Has Full Tray Roots( > 0.5 in)" %>
               </div>
               <% else %>        
               <% end %> 

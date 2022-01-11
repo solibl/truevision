@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_202400) do
     t.integer "first_initial_dry_back"
     t.integer "first_initial_dry_back_day_count"
     t.integer "average_gram_difference"
+    t.integer "first_day_roots"
     t.decimal "success_rate"
     t.boolean "marked_for_outlier", default: false
     t.datetime "created_at", precision: 6, null: false

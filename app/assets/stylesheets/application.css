@@ -137,6 +137,41 @@ img {
   animation: hovering 5s infinite; /* IE 10+, Fx 29+ */
 }
 
+#login-stats-watering-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 50%;
+  bottom: 0;
+  padding: 30px;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(3, 3, 3, 1);
+  overflow: hidden;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+#login-stats-transplanting-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  padding: 30px;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(3, 3, 3, 1);
+  overflow: hidden;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
 
 @keyframes nohovering {
   0%   { z-index: 1; }
@@ -458,6 +493,34 @@ input {
   background-color: #FAF0E6 !important;
 }
 
+.finish-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  height: 80px;
+  background-color: green !important;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.working-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  height: 80px;
+  background-color: red !important;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
 .card-container section{
 }
 
@@ -475,6 +538,23 @@ input {
   transition: all 0.3s ease-in-out;
 }
 
+.finish-card:hover {
+  z-index: 2;
+  background-color: black;
+  color: #01b8aa;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+  transform:  scale(1.20);
+  transition: all 0.3s ease-in-out;
+}
+
+.working-card:hover {
+  z-index: 2;
+  background-color: black;
+  color: #01b8aa;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+  transform:  scale(1.20);
+  transition: all 0.3s ease-in-out;
+}
 .data-sheet-link {
   text-decoration: none;
   color: black;

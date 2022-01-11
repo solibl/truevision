@@ -9,6 +9,9 @@
           <h4>Optimal First Dryback</h4>
         </div>
         <div class= "strain-sheet-column column-sml">
+          <h4>Average First Day Of Roots</h4>
+        </div>        
+        <div class= "strain-sheet-column column-sml">
           <h4>Current Total Plants</h4>
         </div>
         <div class= "strain-sheet-column column-sml">
@@ -21,6 +24,13 @@
         <div class= "strain-sheet-column column-sml">
           <% if !@best_dryback.nil? %>
             <p><%= @best_dryback.first_initial_dry_back %></p>
+          <% else %>
+            <p>N/A</p>
+          <% end %>
+        </div>
+        <div class= "strain-sheet-column column-sml">
+          <% if !@first_day_roots.nil? %>
+            <p><%= @first_day_roots%></p>
           <% else %>
             <p>N/A</p>
           <% end %>

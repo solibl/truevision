@@ -16,9 +16,9 @@
                     <% if !tray.nil? %>
                       <% if tray.data_sheets != [] %>
                         <% if tray.data_sheets.where(current: true) != [] %>
-                          <%= link_to new_data_entry_path(tray.data_sheets.where(current: true).ids), class: "data-sheet-link tray-column card-container" do %>
+                          <%= link_to new_data_entry_path(tray.data_sheets.where(current: true).ids), class: "data-sheet-link tray-column card-container"  do %>
                             <section>
-                              <div class= "card">
+                              <div class= <%= tray.data_sheets.where(current:true).first.data_entries.last.date == DateTime.now.midnight ? 'finish-card' : 'working-card' %>>
                                 <p> <%=rack.name %><%= tray.name %></p>
                                 <p><%= tray.data_sheets.where(current: true).first.strain.name %>(<%= tray.data_sheets.where(current: true).first.total_clone_count %>)</p>
                               </div>
