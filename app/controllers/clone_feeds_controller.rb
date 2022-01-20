@@ -14,7 +14,7 @@ class CloneFeedsController < ApplicationController
     @clone_feed.location = current_user.location
     @clone_feed.date = DateTime.now.midnight
     if @clone_feed.update(clone_feed_params)
-      redirect_to root_path, notice: "Clone feed has been updated."
+      redirect_to data_sheet_index_path
     # Handle a successful update.
     else
       render 'edit'

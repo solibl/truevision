@@ -55,8 +55,7 @@ class DataEntriesController < ApplicationController
       @new_data_entry.has_hood = false
     end
     if @new_data_entry.grown_roots == true && @new_data_entry.data_sheet.first_day_roots == nil
-      @new_data_entry.data_sheet.first_day_roots == @new_data_entry.day_count
-
+      @new_data_entry.data_sheet.first_day_roots = @new_data_entry.day_count
     end
     if @last_data_entry.grown_roots == true
       @new_data_entry.grown_roots = true
