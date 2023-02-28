@@ -119,6 +119,18 @@ class DataEntriesController < ApplicationController
         @data_entry.gram_difference = nil
       end
     end
+    if @data_entry.number_of_plants_killed.nil?
+      @data_entry.data_sheet.total_clone_count = @data_entry.data_sheet.total_clone_count.to_i - data_entries_params[:number_of_plants_killed].to_i
+      @data_entry.data_sheet.save
+    else
+      if @data_entry.number_of_plants_killed.to_i != data_entries_params[:number_of_plants_killed].to_i
+      @new_number_clones_killed = @data_entry.number_of_plants_killed.to_i - data_entries_params[:number_of_plants_killed].to_i
+      @data_entry.data_sheet.total_clone_count = @data_entry.data_sheet.total_clone_count.to_i + @new_number_clones_killed.to_i
+      @data_entry.data_sheet.total_clone_count
+      @data_entry.data_sheet.save        
+      else
+      end
+    end
     @data_entry.update(data_entries_params)
     redirect_to new_data_entry_path(@data_entry.data_sheet)
   end
