@@ -14,7 +14,7 @@ fire_factory = Location.where(name: '810').first
 sl = Location.where(name: 'SL').first
 forty_ninth = Location.where(name: '49th').first
 
-User.create(location: fire_factory, first_name: 'Tim', last_name: 'Spillane', authorization_level: 'Admin', email: '810veg@true-vision.co', password: 'admin1', initials: 'TS')
+User.create(location: fire_factory, first_name: 'Nick', last_name: 'Roman', authorization_level: 'Admin', email: 'n.roman@true-vision.co', password: 'admin1', initials: 'NR')
 
 clones_days = [
   [1400, 1398, 1396, 1394, 1392, 1390, 1388, 1386, 1384, 1382, 1380, 1378, 1376, 1374, 1372, 1370, 1368, 1366, 1364, 1362, 1360, 1358, 1356, 1354, 1352, 1350, 1348, 1346, 1344, 1342, 1340, 1338, 1336, 1334, 1332, 1330, 1328, 1326, 1324, 1322, 1320, 1318, 1316, 1314, 1312, 1310, 1308, 1306, 1304, 1302, 1300, 1298, 1296, 1294, 1292, 1290, 1288, 1286, 1284, 1282, 1280, 1278, 1276, 1274, 1272, 1270, 1268, 1266, 1264, 1262, 1260, 1258, 1256, 1254, 1252, 1250, 1248, 1246, 1244, 1242, 1240, 1238, 1236, 1234, 1232, 1230, 1228, 1226, 1224, 1222, 1220, 1218, 1216, 1214, 1212, 1210, 1208, 1206],

@@ -1,7 +1,7 @@
 class DataSheetsController < ApplicationController
 
   def index
-    @racks = StorageRack.where(current: true, location: current_user.location) 
+    @racks = StorageRack.where(current: true, location: current_user.location)
     @location = current_user.location
     @clone_feed = CloneFeed.where(location: current_user.location).first
     if @clone_feed.nil? == true

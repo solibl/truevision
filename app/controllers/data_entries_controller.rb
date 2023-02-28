@@ -107,11 +107,13 @@ class DataEntriesController < ApplicationController
     @placing_of_last_data_entry = @index_of_data_entries.find_index(@data_entry)
     @last_data_entry = @index_of_data_entries[@placing_of_last_data_entry-1]
     @data_entry.edited_user_initials = current_user.initials
-    if !data_entries_params[:weight] == ""
-      if !@last_data_entry.weight_after_feed.nil?
-        @data_entry.gram_difference = @last_data_entry.weight_after_feed - data_entries_params[:weight].to_i
-      else
+    if data_entries_params[:weight] == ""
+      @data_entry.gram_difference = nil
+    else
+      if @last_data_entry.weight_after_feed.nil?
         @data_entry.gram_difference = @last_data_entry.weight - data_entries_params[:weight].to_i
+      else
+        @data_entry.gram_difference = @last_data_entry.weight_after_feed - data_entries_params[:weight].to_i
       end
       if @data_entry.gram_difference < 0
         @data_entry.gram_difference = nil
@@ -133,6 +135,6 @@ class DataEntriesController < ApplicationController
   end
 
   def data_entries_params
-    params.require(:data_entry).permit(:weight, :number_of_plants_killed, :grown_roots, :note, :grown_roots_less_than_inch, :grown_roots_greater_than_inch, :weight_after_feed, :id)
+    params.require(:data_entry).permit(:weight, :gram_difference, :number_of_plants_killed, :grown_roots, :note, :grown_roots_less_than_inch, :grown_roots_greater_than_inch, :weight_after_feed, :id)
   end
 end

@@ -3,7 +3,7 @@
     <h1>Clone Datasheets for <%= @location.name %></h1>
   </section>
   <section class= "rack-section">
-    <% @racks.in_groups_of(2, false).each do |group_racks| %>
+    <% @racks.in_groups_of(1, false).each do |group_racks| %>
       <div class= "rack-row">
         <% group_racks.each do |rack| %>
           <section class= "rack-column">
