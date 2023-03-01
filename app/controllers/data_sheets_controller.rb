@@ -83,7 +83,7 @@ class DataSheetsController < ApplicationController
   end
 
   def update_transplanted
-    @data_sheet = DataSheet.where(strain: Strain.where(name: params[:strain], status: "Transplanting"))
+    @data_sheet = DataSheet.where(strain: Strain.where(name: params[:strain]), status: "Transplanting", current: true)
     @data_sheet.each do |data_sheet|
       data_sheet.current = false
       data_sheet.status = "Completed"
