@@ -83,7 +83,7 @@ class DataEntriesController < ApplicationController
       @new_data_entry.data_sheet.status = "Watering"
     end
     if @new_data_entry.save
-      if @new_data_entry.data_sheet.data_entries.where(fed: true).count == 1
+      if (@new_data_entry.data_sheet.data_entries.where(fed: true).count == 1 && @new_data_entry.fed == true)
         @new_data_entry.data_sheet.first_initial_dry_back = @new_data_entry.weight
         @new_data_entry.data_sheet.first_initial_dry_back_day_count = @new_data_entry.day_count
       end
