@@ -28,7 +28,7 @@
       </div>
       <% @watering_que.each do |watering_que_data_entry| %>
         <div class= "watering-que-form">        
-          <%= form_for watering_que_data_entry, as: :data_entry, url: update_data_entry_path, method: :update do |f| %>
+          <%= form_for watering_que_data_entry, as: :data_entry, url: update_data_entry_path, data: {turbo_method: :update} do |f| %>
           <div class= "data-entries-row">
             <% if watering_que_data_entry.errors.any? %>
               <ul>

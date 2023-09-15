@@ -13,6 +13,7 @@ gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'jsbundling-rails'
+gem "sprockets-rails"
 gem 'psych', '< 4'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -56,3 +57,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "cssbundling-rails", "~> 1.3"
+
+gem "hotwire-rails", "~> 0.1.3"

@@ -35,7 +35,7 @@
             <% end %>
           </div>
           <div class= "data-sheet-column column-xsml">
-            <%= link_to update_data_sheet_transplanted_path(strain[0]), method: :post do %>
+            <%= link_to update_data_sheet_transplanted_path(strain[0]), data: {turbo_method: :post} do %>
               <button class= "button-link">
                 Completed Transplant        
               </button>

@@ -6,7 +6,7 @@
         <div class= "data-sheet-row">
           <% if @data_sheet.current == true && @data_sheet.status != "Transplanting" %>
             <div class= "data-sheet-column">
-              <%= link_to update_data_sheet_transplanting_path(@data_sheet), method: :post do %>
+              <%= link_to update_data_sheet_transplanting_path(@data_sheet), data: {turbo_method: :post} do %>
                 <button class= "button-link">
                   Ready For Transplant        
                 </button>
@@ -15,7 +15,7 @@
           <% end %>
           <% if @data_sheet.current == true && @data_sheet.marked_for_outlier == false %>
             <div class= "data-sheet-column">
-              <%= link_to mark_sheet_for_outlier_path(@data_sheet), method: :post do %>
+              <%= link_to mark_sheet_for_outlier_path(@data_sheet), data: {turbo_method: :post} do %>
                 <button class= "button-link">
                   Mark Sheet For Invalid Data        
                 </button>
@@ -24,7 +24,7 @@
           <% end %>
           
           <div class= "data-sheet-column">
-            <%= link_to kill_tray_path(@data_sheet), method: :post do %>
+            <%= link_to kill_tray_path(@data_sheet), data: {turbo_method: :post} do %>
               <button class= "button-link">
                 Kill Tray        
               </button>
@@ -156,7 +156,7 @@
             <p>No</p>
           <% end %>
           <% if data_entry.fed == false && data_entry.day_count != 1 && data_entry.date == DateTime.now.midnight %>
-            <%= link_to manual_feed_path(data_entry.data_sheet), method: :post do %>
+            <%= link_to manual_feed_path(data_entry.data_sheet), data: {turbo_method: :post} do %>
               <button class= "button-link">
                 Manual        
               </button>

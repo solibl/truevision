@@ -70,7 +70,7 @@
             <p><%= data_sheet.data_entries.first.date.strftime("%m/%d/%Y") %> - <%= data_sheet.data_entries.last.date.strftime("%m/%d/%Y") %></p>
           </div>        
           <div class= "strain-sheet-column">
-            <%= link_to new_data_entry_path(data_sheet), method: :get do %>
+            <%= link_to new_data_entry_path(data_sheet), data: {turbo_method: :get} do %>
               <button class= "button-link">
                 View Datasheet       
               </button>
