@@ -22,7 +22,7 @@
               <% end %>    
             </div>
           <% end %>
-          
+          <% if @data_sheet.current == true && @data_sheet.marked_for_outlier == false %>         
           <div class= "data-sheet-column">
             <%= link_to kill_tray_path(@data_sheet), data: {turbo_method: :post} do %>
               <button class= "button-link">
@@ -30,6 +30,7 @@
               </button>
             <% end %>    
           </div>
+          <% end %>
         </div>      
       </div>
     </section>
@@ -149,7 +150,7 @@
           <% else %>
             <p>No</p>
           <% end %>
-          <% if data_entry.fed == false && data_entry.day_count != 1 && data_entry.date == DateTime.now.midnight %>
+          <% if data_entry.fed == false && data_entry.day_count != 1 && data_entry.date == DateTime.now.midnight && @data_sheet.current == true %>
             <%= link_to manual_feed_path(data_entry.data_sheet), data: {turbo_method: :post} do %>
               <button class= "button-link">
                 Manual        
@@ -198,7 +199,7 @@
           <% if data_entry.edited_user_initials != nil %>
           <p>Edited By <%= data_entry.edited_user_initials %></p>
           <% end %>
-          <% if data_entry.date == DateTime.now.midnight %>
+          <% if data_entry.date == DateTime.now.midnight && @data_sheet.current == true %>
               <%= link_to edit_data_entry_path(data_entry) do %>
                 <button class= "button-link">
                   Edit            
