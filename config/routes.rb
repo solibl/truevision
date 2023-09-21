@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   #Watering Que
   get 'watering-que', to: 'data_sheets#watering_que'
   post 'manual-feed/:data_sheet', to: 'data_entries#manual_feed', as: 'manual_feed'
-  post 'update-data-entry', to: 'data_entries#update', as: 'update_data_entry'
+  patch 'update-data-entry', to: 'data_entries#update', as: 'update_data_entry'
 
   #Transplanting Que
   get 'transplanting-que', to: 'data_sheets#transplanting_que'

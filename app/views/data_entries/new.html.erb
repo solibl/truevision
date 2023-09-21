@@ -50,9 +50,6 @@
         <div class= "data-sheet-column">
           <h4>Success Rate</h4>
         </div>
-        <div class= "data-sheet-column">
-          <h4>Transplant Date</h4>
-        </div>
       </div>
       <div class= "data-sheet-row">
         <div class= "data-sheet-column">
@@ -73,9 +70,6 @@
         </div>
         <div class= "data-sheet-column">
           <p><%= ((@data_sheet.total_clone_count.to_f / @data_sheet.starting_total_clone_number) * 100).round(0) %>%</p>
-        </div>
-        <div class= "data-sheet-column">
-          <p><%= (@data_sheet.data_entries.order(:id).first.date+14.days).strftime("%m/%d/%Y") %></p>
         </div>
       </div>
     </section>

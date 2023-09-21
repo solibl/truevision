@@ -78,9 +78,11 @@ class DataEntriesController < ApplicationController
     end
     @next_day_count = @new_data_entry.day_count + 1
     @value_of_next_day_feed = CloneFeedSchedule.where(clone_feed_day: @next_day_count, clone_feed_plant_number: @new_data_entry.data_sheet.total_clone_count).first.minimum_feed_weight
-    if ((@new_data_entry.weight - @data_sheet.average_gram_difference) - @value_of_next_day_feed) < -100 && @new_data_entry.weight != nil
-      @new_data_entry.fed = true
-      @new_data_entry.data_sheet.status = "Watering"
+    if @new_data_entry.weight != nil && @data_sheet.average_gram_difference != nil
+      if ((@new_data_entry.weight - @data_sheet.average_gram_difference) - @value_of_next_day_feed) < -100
+        @new_data_entry.fed = true
+        @new_data_entry.data_sheet.status = "Watering"
+      end
     end
     if @new_data_entry.save
       if (@new_data_entry.data_sheet.data_entries.where(fed: true).count == 1 && @new_data_entry.fed == true)
