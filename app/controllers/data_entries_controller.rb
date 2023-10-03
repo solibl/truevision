@@ -48,9 +48,6 @@ class DataEntriesController < ApplicationController
         @new_data_entry.gram_difference = nil
       end
     end
-    @current_clone_feed = CloneFeed.where(location: current_user.location).first
-    @new_data_entry.clone_feed_ph = @current_clone_feed.clone_feed_ph
-    @new_data_entry.clone_feed_ec = @current_clone_feed.clone_feed_ec
     if @new_data_entry.day_count > current_user.location.total_hood_days
       @new_data_entry.has_hood = false
     end
@@ -59,6 +56,14 @@ class DataEntriesController < ApplicationController
     end
     if @last_data_entry.grown_roots == true
       @new_data_entry.grown_roots = true
+    end
+    @current_clone_feed = CloneFeed.where(location: current_user.location).first
+    if @last_data_entry.grown_roots == true
+      @new_data_entry.clone_feed_ph = @current_clone_feed.clone_feed_ph_roots
+      @new_data_entry.clone_feed_ec = @current_clone_feed.clone_feed_ec_roots
+    else
+      @new_data_entry.clone_feed_ph = @current_clone_feed.clone_feed_ph
+      @new_data_entry.clone_feed_ec = @current_clone_feed.clone_feed_ec      
     end
     if @new_data_entry.number_of_plants_killed > 0
       @new_data_entry.data_sheet.total_clone_count -= @new_data_entry.number_of_plants_killed
@@ -140,6 +145,10 @@ class DataEntriesController < ApplicationController
       end
     end
     @data_entry.update(data_entries_params)
+    if @data_entry.fed == false
+      @data_entry.weight_after_feed = nil
+      @data_entry.save
+    end
     redirect_to new_data_entry_path(@data_entry.data_sheet)
   end
 
@@ -155,6 +164,6 @@ class DataEntriesController < ApplicationController
   end
 
   def data_entries_params
-    params.require(:data_entry).permit(:weight, :gram_difference, :number_of_plants_killed, :grown_roots, :note, :grown_roots_less_than_inch, :grown_roots_greater_than_inch, :weight_after_feed, :id)
+    params.require(:data_entry).permit(:weight, :gram_difference, :number_of_plants_killed, :grown_roots, :note, :grown_roots_less_than_inch, :grown_roots_greater_than_inch, :weight_after_feed, :id, :fed)
   end
 end

@@ -22,7 +22,7 @@ class CloneFeedsController < ApplicationController
   end
 
   def clone_feed_params
-    params.require(:clone_feed).permit(:clone_feed_ph, :clone_feed_ec, :volume_per_tray)
+    params.require(:clone_feed).permit(:clone_feed_ph, :clone_feed_ec, :volume_per_tray, :clone_feed_ec_roots, :clone_feed_ph_roots)
   end
 
 end

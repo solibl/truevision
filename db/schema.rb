@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_14_220654) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_03_192547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_220654) do
     t.integer "volume_per_tray"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "clone_feed_ec_roots", precision: 10, scale: 2
+    t.decimal "clone_feed_ph_roots", precision: 10, scale: 2
     t.index ["location_id"], name: "index_clone_feeds_on_location_id"
     t.index ["user_id"], name: "index_clone_feeds_on_user_id"
   end
